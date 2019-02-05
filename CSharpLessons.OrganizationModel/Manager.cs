@@ -9,7 +9,7 @@ namespace CSharpLessons.OrganizationModel
     {
         private readonly List<IEmployee> _employees = new List<IEmployee>();
 
-        public IEnumerable<IEmployee> Employees => _employees;
+        public override IEnumerable<IEmployee> Employees => _employees;
 
         public void AddEmployee(IEmployee employee)
         {
