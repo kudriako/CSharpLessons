@@ -20,14 +20,19 @@ namespace CSharpLessons.OrganizationModel
                 sb.AppendLine(delimiter);
                 sb.AppendLine(Name);
                 sb.AppendLine(delimiter);
-                sb.Append("Title: ");
-                sb.AppendLine(Title);
-                sb.Append("Manager: ");
-                sb.Append(Manager);
-                sb.AppendLine();
+                AppendEmployeeCardDetails(sb);
                 sb.AppendLine(delimiter);
                 return sb.ToString();
             } 
+        }
+
+        protected virtual void AppendEmployeeCardDetails(StringBuilder sb) 
+        {
+            sb.Append("Title: ");
+            sb.AppendLine(Title);
+            sb.Append("Manager: ");
+            sb.Append(Manager);
+            sb.AppendLine();
         }
 
         public override string ToString()
