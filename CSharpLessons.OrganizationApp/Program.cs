@@ -24,6 +24,7 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(doris, ethan);
             organization.AddEmployee(ethan, frank);
             organization.AddEmployee(frank, null);
+            organization.Director = frank;
 
             Console.WriteLine(organization);
 

@@ -11,6 +11,8 @@ namespace CSharpLessons.OrganizationModel
 
         public IEnumerable<IEmployee> Employees => _employees;
 
+        public IEmployee Director { get; set; }
+
         public void AddEmployee(IEmployee employee, Manager manager)
         {
             _employees.Add(employee);
@@ -32,12 +34,19 @@ namespace CSharpLessons.OrganizationModel
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach(var employee in _employees)
-            {
-                sb.Append(employee);
-                sb.AppendLine();
-            }
+            AppendEmployee(sb, Director, 0);
             return sb.ToString();
+        }
+
+        private void AppendEmployee(StringBuilder sb, IEmployee employee, int level)
+        {
+            sb.Append(employee);
+            sb.AppendLine();
+            foreach(var childEmployee in employee.Employees)
+            {
+                sb.Append(new string('\t', level + 1));
+                AppendEmployee(sb, childEmployee, level + 1);
+            }
         }
     }
 }

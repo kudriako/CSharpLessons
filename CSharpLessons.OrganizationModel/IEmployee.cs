@@ -11,6 +11,8 @@ namespace CSharpLessons.OrganizationModel
 
         Manager Manager { get; set; }
 
+        IEnumerable<IEmployee> Employees { get; }
+
         string EmployeeCard { get;}
     }
 }
