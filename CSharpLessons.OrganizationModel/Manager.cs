@@ -5,14 +5,17 @@ using System.Text;
 
 namespace CSharpLessons.OrganizationModel
 {
-    public class Manager : Employee
+    public class Manager : EmployeeBase
     {
-        public Manager()
-        {
-            Employees = new List<IEmployee>();
-        }
+        private readonly List<IEmployee> _employees = new List<IEmployee>();
 
-        public List<IEmployee> Employees { get; }
+        public IEnumerable<IEmployee> Employees => _employees;
+
+        public void AddEmployee(IEmployee employee)
+        {
+            _employees.Add(employee);
+            employee.Manager = this;
+        }
 
         protected override void AppendEmployeeCardDetails(StringBuilder sb) 
         {
@@ -24,6 +27,5 @@ namespace CSharpLessons.OrganizationModel
                 sb.AppendLine(employee.ToString());
             }
         }
-
     }
 }
