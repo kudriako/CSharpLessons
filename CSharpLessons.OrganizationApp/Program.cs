@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CSharpLessons.OrganizationModel;
 
 namespace CSharpLessons.OrganizationApp
@@ -16,6 +17,22 @@ namespace CSharpLessons.OrganizationApp
             var charlie = new Manager() { Name = "Charlie", Title = "Program Manager" };
             alice.Manager = charlie;
             bruce.Manager = charlie;
+
+            var employeeArray = new IEmployee[] { alice, bruce, charlie };
+            for(int i = 0; i < employeeArray.Length; i++)
+            {
+                Console.WriteLine(employeeArray[i]); // employees[i].ToString();
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+
+            var employeeList = new List<IEmployee>() { alice, bruce, charlie };
+            foreach(var employee in employeeList)
+            {
+                Console.WriteLine(employee.EmployeeCard);
+            }
+            Console.WriteLine();
+            Console.WriteLine();
 
             End();
         }

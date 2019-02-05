@@ -9,5 +9,7 @@ namespace CSharpLessons.OrganizationModel
         string Title { get; set; }
 
         Manager Manager { get; set; }
+
+        string EmployeeCard { get;}
     }
 }
