@@ -13,7 +13,9 @@ namespace CSharpLessons.OrganizationApp
 
             var bruce = new Employee() { Name = "Bruce", Title = "Developer" };
 
-            var charlie = new Employee() { Name = "Charlie", Title = "Program Manager" };
+            var charlie = new Manager() { Name = "Charlie", Title = "Program Manager" };
+            alice.Manager = charlie;
+            bruce.Manager = charlie;
 
             End();
         }

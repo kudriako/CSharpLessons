@@ -7,5 +7,7 @@ namespace CSharpLessons.OrganizationModel
         string Name { get; set; }
 
         string Title { get; set; }
+
+        Manager Manager { get; set; }
     }
 }
