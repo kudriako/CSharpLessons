@@ -10,6 +10,8 @@ namespace CSharpLessons.OrganizationApp
         {
             Start();
 
+            var taxOffice = new TaxOffice();
+
             var alice = new Employee() { Name = "Alice", Title = "Test Engineer" };
             var bruce = new Employee() { Name = "Bruce", Title = "Developer" };
             var chloe = new Manager() { Name = "Chloe", Title = "Program Manager" };
