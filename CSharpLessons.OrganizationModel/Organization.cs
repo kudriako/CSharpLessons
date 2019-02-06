@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using CSharpLessons.OrganizationModel.Offices;
+
 namespace CSharpLessons.OrganizationModel
 {
     public class Organization
@@ -13,6 +15,8 @@ namespace CSharpLessons.OrganizationModel
 
         public IEmployee Director { get; set; }
 
+        public event EventHandler<IEmployee> EmployeeAdded;
+
         public void AddEmployee(IEmployee employee, Manager manager)
         {
             _employees.Add(employee);
@@ -20,6 +24,8 @@ namespace CSharpLessons.OrganizationModel
             {
                 manager.AddEmployee(employee);
             }
+
+            EmployeeAdded?.Invoke(this, employee);
         }
 
         public void FireEmployee(IEmployee employee)

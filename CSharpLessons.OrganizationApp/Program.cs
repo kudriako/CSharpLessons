@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using CSharpLessons.OrganizationModel;
+using CSharpLessons.OrganizationModel.Offices;
 
 namespace CSharpLessons.OrganizationApp
 {
@@ -18,6 +20,15 @@ namespace CSharpLessons.OrganizationApp
             var frank = new Manager() { Name = "Frank", Title = "Director" };
 
             var organization = new Organization();
+
+            var taxOffice = new TaxOffice();
+            var insuranceOffice = new InsuranceOffice();
+            var pensionFundOffice = new PensionFundOffice();
+
+            organization.EmployeeAdded += taxOffice.RegisterEmployee;
+            organization.EmployeeAdded += insuranceOffice.Insure;
+            organization.EmployeeAdded += pensionFundOffice.AddToPensionProgram;
+
             organization.AddEmployee(alice, chloe);
             organization.AddEmployee(bruce, chloe);
             organization.AddEmployee(chloe, frank);
@@ -26,13 +37,9 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(frank, null);
             organization.Director = frank;
 
-            Console.WriteLine(organization);
-
-            organization.FireEmployee(chloe);
-
-            Console.WriteLine(organization);
-
-            organization.PrintEmployeeCards();
+            organization.EmployeeAdded -= taxOffice.RegisterEmployee;
+            organization.EmployeeAdded -= insuranceOffice.Insure;
+            organization.EmployeeAdded -= pensionFundOffice.AddToPensionProgram;
 
             End();
         }
