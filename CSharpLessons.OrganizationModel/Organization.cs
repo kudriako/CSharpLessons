@@ -22,6 +22,15 @@ namespace CSharpLessons.OrganizationModel
             }
         }
 
+        public void FireEmployee(IEmployee employee)
+        {
+            if (employee.Manager != null)
+            {
+                employee.Manager.RemoveEmployee(employee);
+            }
+            _employees.Remove(employee);
+        }
+
         public void PrintEmployeeCards()
         {
             foreach(var employee in _employees)

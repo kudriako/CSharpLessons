@@ -28,6 +28,10 @@ namespace CSharpLessons.OrganizationApp
 
             Console.WriteLine(organization);
 
+            organization.FireEmployee(chloe);
+
+            Console.WriteLine(organization);
+
             organization.PrintEmployeeCards();
 
             End();

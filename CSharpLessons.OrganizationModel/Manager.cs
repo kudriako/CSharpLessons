@@ -17,6 +17,15 @@ namespace CSharpLessons.OrganizationModel
             employee.Manager = this;
         }
 
+        public void RemoveEmployee(IEmployee employee)
+        {
+            _employees.Remove(employee);
+            foreach(var subemployee in employee.Employees)
+            {
+                AddEmployee(subemployee);
+            }
+        }
+
         protected override void AppendEmployeeCardDetails(StringBuilder sb) 
         {
             base.AppendEmployeeCardDetails(sb);
