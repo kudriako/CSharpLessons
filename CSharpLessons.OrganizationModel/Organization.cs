@@ -11,12 +11,19 @@ namespace CSharpLessons.OrganizationModel
     {
         private List<IEmployee> _employees = new List<IEmployee>();
 
+        public string Name { get; }
+
         public IEnumerable<IEmployee> Employees => _employees;
 
         public IEmployee Director { get; set; }
 
         public event EventHandler<IEmployee> EmployeeAdded;
 
+        public Organization(string name)
+        {
+            Name = name;
+        }
+        
         public void AddEmployee(IEmployee employee, Manager manager)
         {
             _employees.Add(employee);
@@ -24,8 +31,7 @@ namespace CSharpLessons.OrganizationModel
             {
                 manager.AddEmployee(employee);
             }
-
-            EmployeeAdded?.Invoke(this, employee);
+            OnEmployeeAdded(employee);
         }
 
         public void FireEmployee(IEmployee employee)
@@ -51,6 +57,11 @@ namespace CSharpLessons.OrganizationModel
             var sb = new StringBuilder();
             AppendEmployee(sb, Director, 0);
             return sb.ToString();
+        }
+
+        protected virtual void OnEmployeeAdded(IEmployee employee)
+        {
+            EmployeeAdded?.Invoke(this, employee);
         }
 
         private void AppendEmployee(StringBuilder sb, IEmployee employee, int level)

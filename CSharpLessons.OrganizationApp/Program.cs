@@ -19,14 +19,15 @@ namespace CSharpLessons.OrganizationApp
             var ethan = new Manager() { Name = "Ethan", Title = "Release Manager" };
             var frank = new Manager() { Name = "Frank", Title = "Director" };
 
-            var organization = new Organization();
+            var organization = new Organization("DoodleSoft");
 
             var taxOffice = new TaxOffice();
             var insuranceOffice = new InsuranceOffice();
             var pensionFundOffice = new PensionFundOffice();
 
+            insuranceOffice.Subscribe(organization);
+
             organization.EmployeeAdded += taxOffice.RegisterEmployee;
-            organization.EmployeeAdded += insuranceOffice.Insure;
             organization.EmployeeAdded += pensionFundOffice.AddToPensionProgram;
 
             organization.AddEmployee(alice, chloe);
@@ -37,8 +38,9 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(frank, null);
             organization.Director = frank;
 
+            insuranceOffice.Unsubscribe(organization);
+
             organization.EmployeeAdded -= taxOffice.RegisterEmployee;
-            organization.EmployeeAdded -= insuranceOffice.Insure;
             organization.EmployeeAdded -= pensionFundOffice.AddToPensionProgram;
 
             End();
