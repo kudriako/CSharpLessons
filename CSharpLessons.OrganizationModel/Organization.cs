@@ -11,13 +11,27 @@ namespace CSharpLessons.OrganizationModel
     {
         private List<IEmployee> _employees = new List<IEmployee>();
 
+        private event EventHandler<IEmployee> _employeeAdded;
+
         public string Name { get; }
 
         public IEnumerable<IEmployee> Employees => _employees;
 
         public IEmployee Director { get; set; }
 
-        public event EventHandler<IEmployee> EmployeeAdded;
+        public event EventHandler<IEmployee> EmployeeAdded
+        {
+            add
+            {
+                _employeeAdded += value;
+                Console.WriteLine("Someone subscribed to event.");
+            }
+            remove
+            {
+                _employeeAdded -= value;
+                Console.WriteLine("Someone unsubscribed from event.");
+            }
+        }
 
         public Organization(string name)
         {
@@ -61,7 +75,7 @@ namespace CSharpLessons.OrganizationModel
 
         protected virtual void OnEmployeeAdded(IEmployee employee)
         {
-            EmployeeAdded?.Invoke(this, employee);
+            _employeeAdded?.Invoke(this, employee);
         }
 
         private void AppendEmployee(StringBuilder sb, IEmployee employee, int level)
