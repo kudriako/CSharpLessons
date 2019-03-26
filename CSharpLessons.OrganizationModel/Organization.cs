@@ -80,6 +80,8 @@ namespace CSharpLessons.OrganizationModel
 
         private void AppendEmployee(StringBuilder sb, IEmployee employee, int level)
         {
+            if (employee == null)
+                return;
             sb.Append(employee);
             sb.AppendLine();
             foreach(var childEmployee in employee.Employees)
