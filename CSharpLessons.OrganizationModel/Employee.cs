@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CSharpLessons.OrganizationModel
 {
+    [Serializable]
     public class Employee : EmployeeBase
     {
         public override IEnumerable<IEmployee> Employees 

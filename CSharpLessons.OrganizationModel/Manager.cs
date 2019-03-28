@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CSharpLessons.OrganizationModel
 {
+    [Serializable]
     public class Manager : EmployeeBase
     {
         private readonly List<IEmployee> _employees = new List<IEmployee>();

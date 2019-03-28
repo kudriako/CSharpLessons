@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace CSharpLessons.OrganizationModel
 {
+    [Serializable]
     public abstract class EmployeeBase : IEmployee
     {
         public string Name { get; set; }
@@ -12,8 +15,11 @@ namespace CSharpLessons.OrganizationModel
 
         public Manager Manager { get; set; }
 
+        //[JsonIgnore]
+        //[XmlIgnore]
         public abstract IEnumerable<IEmployee> Employees { get; }
 
+        [JsonIgnore]
         public string EmployeeCard
         { 
             get

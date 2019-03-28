@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 
 using CSharpLessons.OrganizationModel.Offices;
+using Newtonsoft.Json;
 
 namespace CSharpLessons.OrganizationModel
 {
+    [Serializable]
     public class Organization
     {
         private List<IEmployee> _employees = new List<IEmployee>();
@@ -17,7 +19,7 @@ namespace CSharpLessons.OrganizationModel
 
         public IEnumerable<IEmployee> Employees => _employees;
 
-        public IEmployee Director { get; set; }
+        public Manager Director { get; set; }
 
         public event EventHandler<IEmployee> EmployeeAdded
         {
@@ -31,6 +33,10 @@ namespace CSharpLessons.OrganizationModel
                 _employeeAdded -= value;
                 Console.WriteLine("Someone unsubscribed from event.");
             }
+        }
+
+        public Organization()
+        {
         }
 
         public Organization(string name)
