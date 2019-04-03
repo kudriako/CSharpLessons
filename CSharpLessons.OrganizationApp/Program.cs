@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using CSharpLessons.OrganizationModel;
 using CSharpLessons.OrganizationModel.Offices;
 
@@ -25,11 +25,6 @@ namespace CSharpLessons.OrganizationApp
             var insuranceOffice = new InsuranceOffice();
             var pensionFundOffice = new PensionFundOffice();
 
-            insuranceOffice.Subscribe(organization);
-
-            organization.EmployeeAdded += taxOffice.RegisterEmployee;
-            organization.EmployeeAdded += pensionFundOffice.AddToPensionProgram;
-
             organization.AddEmployee(alice, chloe);
             organization.AddEmployee(bruce, chloe);
             organization.AddEmployee(chloe, frank);
@@ -38,11 +33,43 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(frank, null);
             organization.Director = frank;
 
-            insuranceOffice.Unsubscribe(organization);
 
-            organization.EmployeeAdded -= taxOffice.RegisterEmployee;
-            organization.EmployeeAdded -= pensionFundOffice.AddToPensionProgram;
+            // 1. Lamda syntax
 
+            var count = organization.Employees.Where(e => e.Manager == chloe).Count();
+            Console.WriteLine(count);
+
+            // 2. Query syntax
+
+            var count2 = (from employee in organization.Employees 
+                         where employee.Manager == chloe
+                         select employee).Count();
+            Console.WriteLine(count2);
+
+            Console.WriteLine();
+
+            // 3. See organization.Employees for IEnumerable implementation
+
+            // 4. Deffered execution example
+            var words = new string[] {"aaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbb", "ccc"};
+            var result = words.Where(w => w.Length < 5);
+            words[0] = "aaa";
+            Console.WriteLine($"Number of short words: {result.Count()}"); // Displays 2 becaus result is evaluated at use after word[0] is changed.
+
+            // 5. Multiple evaluation example
+            var source = new string[] {"aaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbb", "ccc"};
+            var enumeration = source.Where(s => s.Length < 5);
+            // Here we check that enumeration contains at least one element and we can use it with no errors.
+            if (enumeration.Any())
+            {
+                // this change can be made from another place by another thread.
+                // even more this can be done in any source: in database neither in file neither in XML document whatever.
+                source[2] = "asdasdasdasdasdasdasdasd";
+                // this will throw an exception then:
+                // An unhandled exception of type 'System.InvalidOperationException' occurred in System.Linq.dll: 
+                // 'Sequence contains no elements'.
+                Console.WriteLine(enumeration.First());
+            }
             End();
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace CSharpLessons.OrganizationModel
 
         public string Name { get; }
 
-        public IEnumerable<IEmployee> Employees => _employees;
+        public IEnumerable<IEmployee> Employees => EnumerateEmployees();
 
         public IEmployee Director { get; set; }
 
@@ -86,6 +87,22 @@ namespace CSharpLessons.OrganizationModel
             {
                 sb.Append(new string('\t', level + 1));
                 AppendEmployee(sb, childEmployee, level + 1);
+            }
+        }
+
+        private IEnumerable<IEmployee> EnumerateEmployees()
+        {
+            return EnumerateEmployees(Director);
+        }
+
+        private IEnumerable<IEmployee> EnumerateEmployees(IEmployee employee)
+        {
+            if (employee == null)
+                yield break;
+            yield return employee;
+            foreach(var e in employee.Employees.SelectMany(EnumerateEmployees))
+            {
+                yield return e;
             }
         }
     }
