@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using CSharpLessons.OrganizationModel;
 using CSharpLessons.OrganizationModel.Offices;
 
@@ -25,11 +25,6 @@ namespace CSharpLessons.OrganizationApp
             var insuranceOffice = new InsuranceOffice();
             var pensionFundOffice = new PensionFundOffice();
 
-            insuranceOffice.Subscribe(organization);
-
-            organization.EmployeeAdded += taxOffice.RegisterEmployee;
-            organization.EmployeeAdded += pensionFundOffice.AddToPensionProgram;
-
             organization.AddEmployee(alice, chloe);
             organization.AddEmployee(bruce, chloe);
             organization.AddEmployee(chloe, frank);
@@ -38,13 +33,26 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(frank, null);
             organization.Director = frank;
 
-            insuranceOffice.Unsubscribe(organization);
+            CSharpLessons.OrganizationData.OrganizationContext context = new CSharpLessons.OrganizationData.OrganizationContext();
+            var org = context.BuildOrganization("New organization");
 
-            organization.EmployeeAdded -= taxOffice.RegisterEmployee;
-            organization.EmployeeAdded -= pensionFundOffice.AddToPensionProgram;
+            var pi = CalculatePi(10000000);
 
             End();
         }
+
+        private static double CalculatePi(int n)
+        {
+            var randomX = new Random();
+            var randomY = new Random();
+            var count = Enumerable.Repeat(0, n).Where(x => IsInCircle(randomX.NextDouble(), randomY.NextDouble())).Count();
+            return 4.0 * count / n;
+        }
+        private static bool IsInCircle(double x, double y)
+        {
+            return x * x + y * y < 1.0;
+        }
+
 
         static void Start()
         {

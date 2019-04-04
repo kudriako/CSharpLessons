@@ -13,6 +13,8 @@ namespace CSharpLessons.OrganizationModel
 
         private event EventHandler<IEmployee> _employeeAdded;
 
+        private int _subscriptionCount;
+
         public string Name { get; }
 
         public IEnumerable<IEmployee> Employees => _employees;
@@ -25,11 +27,16 @@ namespace CSharpLessons.OrganizationModel
             {
                 _employeeAdded += value;
                 Console.WriteLine("Someone subscribed to event.");
+                _subscriptionCount++;
+                Console.WriteLine($"Number of subscribers is {_subscriptionCount}");
+                
             }
             remove
             {
                 _employeeAdded -= value;
                 Console.WriteLine("Someone unsubscribed from event.");
+                _subscriptionCount--;
+                Console.WriteLine($"Number of subscribers is {_subscriptionCount}");
             }
         }
 
@@ -56,7 +63,6 @@ namespace CSharpLessons.OrganizationModel
             }
             _employees.Remove(employee);
         }
-
         public void PrintEmployeeCards()
         {
             foreach(var employee in _employees)
@@ -86,6 +92,22 @@ namespace CSharpLessons.OrganizationModel
             {
                 sb.Append(new string('\t', level + 1));
                 AppendEmployee(sb, childEmployee, level + 1);
+            }
+        }
+
+        private IEnumerable<IEmployee> EnumerateEmployees()
+        {
+            return EnumerateEmployees(Director);
+        }
+
+        private IEnumerable<IEmployee> EnumerateEmployees(IEmployee employee)
+        {
+            if (employee == null)
+                yield break;
+            yield return employee;
+            foreach(var e in employee.Employees.SelectMany(EnumerateEmployees))
+            {
+                yield return e;
             }
         }
     }
