@@ -33,18 +33,33 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(frank, null);
             organization.Director = frank;
 
+            foreach(var employee in organization.Employees)
+            {
+                Console.WriteLine(employee);
+            }
+
             CSharpLessons.OrganizationData.OrganizationContext context = new CSharpLessons.OrganizationData.OrganizationContext();
+            
+            foreach(var emp in context.Employees)
+            {
+                Console.WriteLine($"{emp.Id}, {emp.Name}, {emp.ManagerId}");
+            }
             var org = context.BuildOrganization("New organization");
+            
+            context.AddEmployee(doris);
 
-            var pi = CalculatePi(10000000);
-
+            var pi = CalculatePi(1000);
+            Console.WriteLine(pi);
+            Console.WriteLine(CalculatePi(100000));
+            Console.WriteLine(CalculatePi(10000000));
+            Console.WriteLine(Math.PI);
             End();
         }
 
         private static double CalculatePi(int n)
         {
-            var randomX = new Random();
-            var randomY = new Random();
+            var randomX = new Random(56675765);
+            var randomY = new Random(98798768);
             var count = Enumerable.Repeat(0, n).Where(x => IsInCircle(randomX.NextDouble(), randomY.NextDouble())).Count();
             return 4.0 * count / n;
         }

@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using CSharpLessons.OrganizationModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpLessons.OrganizationData
@@ -8,6 +9,11 @@ namespace CSharpLessons.OrganizationData
     public class OrganizationContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CSharpLessons;Integrated Security=True");
+        }
 
         public IQueryable<OrganizationModel.Employee>  ModelEmployees => Employees.Select(o => new OrganizationModel.Employee() { Name = o.Name });
 
@@ -39,9 +45,14 @@ namespace CSharpLessons.OrganizationData
             return org;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        
+
+        public void AddEmployee(OrganizationModel.Employee employee)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CSharpLessons;Integrated Security=True");
+            var maxId = Employees.Select(x => x.Id).Max();
+            var record = new Employee { Id = maxId + 1, Name = employee.Name };
+            Employees.Add(record);
+            SaveChanges();
         }
     }
 }

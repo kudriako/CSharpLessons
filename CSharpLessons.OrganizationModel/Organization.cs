@@ -17,7 +17,7 @@ namespace CSharpLessons.OrganizationModel
 
         public string Name { get; }
 
-        public IEnumerable<IEmployee> Employees => _employees;
+        public IEnumerable<IEmployee> Employees => EnumerateEmployees();
 
         public IEmployee Director { get; set; }
 
