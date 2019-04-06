@@ -19,7 +19,7 @@ namespace CSharpLessons.OrganizationModel
 
         public IEnumerable<IEmployee> Employees => EnumerateEmployees();
 
-        public IEmployee Director { get; set; }
+        public Manager Director { get; private set; }
 
         public event EventHandler<IEmployee> EmployeeAdded
         {
@@ -48,7 +48,15 @@ namespace CSharpLessons.OrganizationModel
         public void AddEmployee(IEmployee employee, Manager manager)
         {
             _employees.Add(employee);
-            if (manager != null)
+            if (manager == null && Director != null)
+            {
+                throw new InvalidOperationException("Can be only one Director.");
+            }
+            else if (manager == null)
+            {
+                Director = employee as Manager;
+            }
+            else
             {
                 manager.AddEmployee(employee);
             }

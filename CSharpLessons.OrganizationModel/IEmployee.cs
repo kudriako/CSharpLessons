@@ -5,6 +5,8 @@ namespace CSharpLessons.OrganizationModel
 {
     public interface IEmployee
     {
+        int Id { get; set; }
+
         string Name { get; set; }
 
         string Title { get; set; }

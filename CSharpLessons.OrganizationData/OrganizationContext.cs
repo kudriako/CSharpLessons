@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CSharpLessons.OrganizationModel;
+
 using Microsoft.EntityFrameworkCore;
+
+using Model = CSharpLessons.OrganizationModel;
 
 namespace CSharpLessons.OrganizationData
 {
@@ -15,43 +17,35 @@ namespace CSharpLessons.OrganizationData
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CSharpLessons;Integrated Security=True");
         }
 
-        public IQueryable<OrganizationModel.Employee>  ModelEmployees => Employees.Select(o => new OrganizationModel.Employee() { Name = o.Name });
-
-        public OrganizationModel.Organization BuildOrganization(string name)
+        public Model.Organization BuildOrganization(string name)
         {
-            var org = new OrganizationModel.Organization(name);
-            var entities = Employees.ToDictionary(e => e.Id);
-            var employees = entities.ToDictionary(d => d.Key, d => {
-                if (entities.Any(x => x.Value.ManagerId == d.Key))
-                {
-                    return (OrganizationModel.IEmployee)new OrganizationModel.Manager() { Name = d.Value.Name };
-                }
-                else
-                {
-                    return (OrganizationModel.IEmployee)new OrganizationModel.Employee() { Name = d.Value.Name };
-                }
-            });
-            
-            var directorKey = entities.First(x => x.Value.ManagerId == null).Key;
-            org.Director = employees[directorKey];
+            var org = new Model.Organization(name);
 
-            foreach(var employee in employees)
+            var list = Employees
+                // Create a pair of employee and id of its manager.
+                .Select(entity => 
+                    new 
+                    { 
+                        Employee = entity.GetModel(), 
+                        ManagerId = entity.ManagerId
+                    }
+                )
+                // Materialize (gets result of) a query.
+                .ToList();
+
+            foreach(var item in list)
             {
-                var managerId = entities[employee.Key].ManagerId ?? -1;
-                employees.TryGetValue(managerId, out var manager);
-                org.AddEmployee(employee.Value, manager as OrganizationModel.Manager);
+                var manager = list.SingleOrDefault(x => x.Employee.Id == (item.ManagerId ?? -1))?.Employee as Model.Manager;
+                org.AddEmployee(item.Employee, manager);
             }
 
             return org;
         }
 
-        
-
-        public void AddEmployee(OrganizationModel.Employee employee)
+        public void AddEmployee(Model.IEmployee employee)
         {
-            var maxId = Employees.Select(x => x.Id).Max();
-            var record = new Employee { Id = maxId + 1, Name = employee.Name };
-            Employees.Add(record);
+            var entity = new Employee(employee);
+            Employees.Add(entity);
             SaveChanges();
         }
     }

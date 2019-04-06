@@ -6,6 +6,8 @@ namespace CSharpLessons.OrganizationModel
 {
     public abstract class EmployeeBase : IEmployee
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Title { get; set; }

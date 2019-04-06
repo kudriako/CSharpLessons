@@ -31,43 +31,51 @@ namespace CSharpLessons.OrganizationApp
             organization.AddEmployee(doris, ethan);
             organization.AddEmployee(ethan, frank);
             organization.AddEmployee(frank, null);
-            organization.Director = frank;
 
-            foreach(var employee in organization.Employees)
-            {
-                Console.WriteLine(employee);
-            }
+            Console.WriteLine("Organization:");
+            Console.WriteLine(organization);
+            Console.WriteLine();
+            Console.WriteLine();
 
+            // Creating context
             CSharpLessons.OrganizationData.OrganizationContext context = new CSharpLessons.OrganizationData.OrganizationContext();
-            
+
+            Console.WriteLine("From database");
+            Console.WriteLine("ID, NAME, TITLE, MANAGERID, ISMANAGER");
             foreach(var emp in context.Employees)
             {
-                Console.WriteLine($"{emp.Id}, {emp.Name}, {emp.ManagerId}");
+                Console.WriteLine($"{emp.Id}, {emp.Name}, {emp.Title}, {emp.ManagerId}, {emp.IsManager}");
             }
-            var org = context.BuildOrganization("New organization");
-            
-            context.AddEmployee(doris);
+            Console.WriteLine();
+            Console.WriteLine();
 
-            var pi = CalculatePi(1000);
-            Console.WriteLine(pi);
-            Console.WriteLine(CalculatePi(100000));
-            Console.WriteLine(CalculatePi(10000000));
-            Console.WriteLine(Math.PI);
+
+            var org = context.BuildOrganization("New organization");
+            Console.WriteLine("Organization was restored from database:");
+            Console.WriteLine(org);
+
+            Console.WriteLine("Now adding Ivor as Sales Manager.");
+            Console.WriteLine(org);
+            var ivor = new Manager() { Name = "Ivor", Title = "Sales Manager" };
+            org.AddEmployee(ivor, org.Director);
+            
+            Console.WriteLine("Saving to database.");
+            context.AddEmployee(ivor);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // Displaying database content once more
+            Console.WriteLine("From database");
+            Console.WriteLine("ID, NAME, TITLE, MANAGERID, ISMANAGER");
+            foreach(var emp in context.Employees)
+            {
+                Console.WriteLine($"{emp.Id}, {emp.Name}, {emp.Title}, {emp.ManagerId}, {emp.IsManager}");
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+
             End();
         }
-
-        private static double CalculatePi(int n)
-        {
-            var randomX = new Random(56675765);
-            var randomY = new Random(98798768);
-            var count = Enumerable.Repeat(0, n).Where(x => IsInCircle(randomX.NextDouble(), randomY.NextDouble())).Count();
-            return 4.0 * count / n;
-        }
-        private static bool IsInCircle(double x, double y)
-        {
-            return x * x + y * y < 1.0;
-        }
-
 
         static void Start()
         {
