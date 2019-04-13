@@ -27,28 +27,18 @@ namespace CSharpLessons.Synchronous
                     Console.WriteLine($"Invalid Number.");
                     continue;
                 }
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                bool isPrime = checker.IsPrime(number);
-                stopwatch.Stop();
+                bool isPrime = checker.IsPrime(number, out double seconds);
                 if (isPrime)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Number {number} is prime. Elapsed time {stopwatch.Elapsed.TotalSeconds} s.");
+                    Console.WriteLine($"Number {number} is prime. Elapsed time {seconds} s.");
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Number {number} is composite. Elapsed time {stopwatch.Elapsed.TotalSeconds} s.");
+                    Console.WriteLine($"Number {number} is composite. Elapsed time {seconds} s.");
                 }
-                stopwatch.Reset();
             } 
-        }
-
-        static void CheckNumber(PrimeNumberChecker checker, int number)
-        {
-            
-            Console.WriteLine($"Number {number} is prime;");
         }
     }
 }

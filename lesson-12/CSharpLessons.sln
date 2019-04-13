@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLessons.Synchronous", "CSharpLessons.Synchronous\CSharpLessons.Synchronous.csproj", "{DB729BD8-CE42-4501-82D0-DACBCDC53BA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLessons.DAP", "CSharpLessons.DAP\CSharpLessons.DAP.csproj", "{440040FD-40CD-4748-A0C7-92A37B79106C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{DB729BD8-CE42-4501-82D0-DACBCDC53BA3}.Release|x64.Build.0 = Release|Any CPU
 		{DB729BD8-CE42-4501-82D0-DACBCDC53BA3}.Release|x86.ActiveCfg = Release|Any CPU
 		{DB729BD8-CE42-4501-82D0-DACBCDC53BA3}.Release|x86.Build.0 = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|x64.Build.0 = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Debug|x86.Build.0 = Debug|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x64.ActiveCfg = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x64.Build.0 = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x86.ActiveCfg = Release|Any CPU
+		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

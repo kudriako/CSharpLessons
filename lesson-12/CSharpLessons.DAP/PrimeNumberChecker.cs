@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace CSharpLessons.Synchronous
+namespace CSharpLessons.DAP
 {
     public class PrimeNumberChecker
     {
@@ -16,7 +16,7 @@ namespace CSharpLessons.Synchronous
             try
             {
                 if (number % 2 == 0)
-                    return true;
+                    return false;
                 var limit = (uint)Math.Sqrt((double)number);
                 for(uint i = 3; i <= limit; i += 2)
                 {
