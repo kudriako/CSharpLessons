@@ -59,11 +59,14 @@ namespace CSharpLessons.DAP
                 results.Add(result);
             }
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"Waiting for all calculations complete");
+            Console.WriteLine($"Waiting for all calculations complete!");
             Console.ForegroundColor = ConsoleColor.Gray;
             // Wait for all results.
             WaitHandle[] handles = results.Select(r => r.AsyncWaitHandle).ToArray();
-            WaitHandle.WaitAll(handles);
+            if (handles.Length > 0)
+            {
+                WaitHandle.WaitAll(handles);
+            }
         }
 
         static void PrintResult(IAsyncResult result)

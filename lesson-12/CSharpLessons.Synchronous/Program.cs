@@ -7,6 +7,9 @@ namespace CSharpLessons.Synchronous
     {
         // Number 1000000000000003 is composite. Elapsed time 3,4465615 s.
         // Number 1000000000000037 is prime. Elapsed time 7,345191 s.
+        // Number 10000000000000037 is composite. Elapsed time 14,3157489 s.
+        // Number 10000000000000069 is prime. Elapsed time 24,3446908 s
+        // Number 10000000000000079 is prime. Elapsed time 24,3353885 s.
         // Number 100000000000000003 is prime. Elapsed time 73,8872612 s.
         // Number 100000000000000013 is prime. Elapsed time 73,9257551 s.
         static void Main(string[] args)

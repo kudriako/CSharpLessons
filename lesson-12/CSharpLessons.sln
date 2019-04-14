@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLessons.Synchronous",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLessons.DAP", "CSharpLessons.DAP\CSharpLessons.DAP.csproj", "{440040FD-40CD-4748-A0C7-92A37B79106C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLessons.EAP", "CSharpLessons.EAP\CSharpLessons.EAP.csproj", "{58D59B40-D841-4D3A-ACC1-58A8390972FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x64.Build.0 = Release|Any CPU
 		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x86.ActiveCfg = Release|Any CPU
 		{440040FD-40CD-4748-A0C7-92A37B79106C}.Release|x86.Build.0 = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|x64.Build.0 = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Debug|x86.Build.0 = Debug|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|x64.ActiveCfg = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|x64.Build.0 = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|x86.ActiveCfg = Release|Any CPU
+		{58D59B40-D841-4D3A-ACC1-58A8390972FD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -12,6 +12,27 @@
             "problemMatcher": "$tsc"
         },
         {
+            "label": "buildEAP",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CSharpLessons.EAP/CSharpLessons.EAP.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "buildDAP",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CSharpLessons.DAP/CSharpLessons.DAP.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",
