@@ -17,7 +17,6 @@ namespace CSharpLessons.DAP
         // Number 1000000000000037 is prime. Elapsed time 7,345191 s.
         // Number 10000000000000037 is composite. Elapsed time 14,3157489 s.
         // Number 10000000000000069 is prime. Elapsed time 24,3446908 s
-        // Number 10000000000000069 is prime. Elapsed time 24,8230188 s.
         // Number 10000000000000079 is prime. Elapsed time 24,3353885 s.
         // Number 100000000000000003 is prime. Elapsed time 73,8872612 s.
         // Number 100000000000000013 is prime. Elapsed time 73,9257551 s.
@@ -33,24 +32,35 @@ namespace CSharpLessons.DAP
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("Enter the number:");
+                Console.WriteLine("--------");
+                Console.WriteLine("Enter the number and press Enter (or press Enter for statistics or 'q' and Enter for exit):");
                 input = Console.ReadLine();
-                if (string.IsNullOrEmpty(input))
+                if (string.Equals(input, "q", StringComparison.InvariantCultureIgnoreCase))
+                {
                     break;
+                }
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine($"Calculations started: {results.Count}");
+                    Console.WriteLine($"Calculations acomplished: {results.Where(r => r.IsCompleted).Count()}");
+                    Console.WriteLine($"Calculations in progress: {results.Where(r => !r.IsCompleted).Count()}");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    continue;
+                }
                 if (!decimal.TryParse(input, out decimal number))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Invalid Number.");
+                    Console.WriteLine($"Invalid number.");
                     continue;
                 }
                 // Last parameter is an object state
                 IAsyncResult result = caller.BeginInvoke(number, out double seconds, new AsyncCallback(PrintResult), number);
                 results.Add(result);
-                Console.WriteLine($"Calculations started: {results.Count}");
-                Console.WriteLine($"Calculations complete: {results.Where(r => r.IsCompleted).Count()}");
-                Console.WriteLine($"Calculations in progress: {results.Where(r => !r.IsCompleted).Count()}");
             }
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Waiting for all calculations complete");
+            Console.ForegroundColor = ConsoleColor.Gray;
             // Wait for all results.
             WaitHandle[] handles = results.Select(r => r.AsyncWaitHandle).ToArray();
             WaitHandle.WaitAll(handles);
@@ -60,28 +70,32 @@ namespace CSharpLessons.DAP
         {
             AsyncResult asyncResult = (AsyncResult)result;
             AsyncMethodCaller caller = (AsyncMethodCaller)asyncResult.AsyncDelegate;
+            // Retreaving previously stored number.
             decimal number = (decimal)result.AsyncState;
-            // Call EndInvoke to retrieve the results.
             try
             {
+                // Call EndInvoke to retrieve the results.
                 bool isPrime = caller.EndInvoke(out double seconds, result);
                 if (isPrime)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Number {number} is prime. Elapsed time {seconds} s.");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"Number {number} is composite. Elapsed time {seconds} s.");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exceptions from async operations will appear here.
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
+                Console.ForegroundColor = ConsoleColor.Gray;
                 return;
             }
-
         }
     }
 }
