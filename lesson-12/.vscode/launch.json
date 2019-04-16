@@ -5,6 +5,17 @@
    "version": "0.2.0",
    "configurations": [
         {
+            "name": "Tasks",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "buildTasks",
+            "program": "${workspaceFolder}/CSharpLessons.Tasks/bin/Debug/net47/CSharpLessons.Tasks.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
             "name": "TAP",
             "type": "clr",
             "request": "launch",

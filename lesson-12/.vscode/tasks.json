@@ -12,6 +12,16 @@
             "problemMatcher": "$tsc"
         },
         {
+            "label": "buildTasks",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CSharpLessons.Tasks/CSharpLessons.Tasks.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
             "label": "buildTAP",
             "command": "dotnet",
             "type": "process",
