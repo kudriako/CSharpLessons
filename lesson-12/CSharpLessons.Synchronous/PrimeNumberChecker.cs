@@ -15,8 +15,10 @@ namespace CSharpLessons.Synchronous
             stopwatch.Start();
             try
             {
-                if (number % 2 == 0)
+                if (number == 2)
                     return true;
+                if (number % 2 == 0)
+                    return false;
                 var limit = (uint)Math.Sqrt((double)number);
                 for(uint i = 3; i <= limit; i += 2)
                 {

@@ -5,6 +5,17 @@
    "version": "0.2.0",
    "configurations": [
         {
+            "name": "TAP",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "buildTAP",
+            "program": "${workspaceFolder}/CSharpLessons.TAP/bin/Debug/net47/CSharpLessons.TAP.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
            "name": "EAP",
            "type": "clr",
            "request": "launch",

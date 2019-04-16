@@ -15,6 +15,8 @@ namespace CSharpLessons.DAP
             stopwatch.Start();
             try
             {
+                if (number == 2)
+                    return true;
                 if (number % 2 == 0)
                     return false;
                 var limit = (uint)Math.Sqrt((double)number);
